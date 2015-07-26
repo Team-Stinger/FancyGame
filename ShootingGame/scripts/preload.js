@@ -8,11 +8,12 @@ preload.prototype = {
         var loadingBar = this.add.sprite(160,240,"loading");
         loadingBar.anchor.setTo(0.5,0.5);
         this.load.setPreloadSprite(loadingBar);
-        this.game.load.spritesheet("dog","assets/dog.png",30,24,11);
+        this.game.load.spritesheet("dog","assets/dog.png",30,24);
         this.game.load.image("background","assets/bg.jpg");
         this.game.load.image("gametitle","assets/Title.png");
         this.game.load.image("play","assets/playButton.jpg");
-        this.game.load.image("gameover","assets/gameover.png");
+        this.game.load.image("gun","assets/gun.png");
+        this.game.load.image("gameover","assets/gameOver.png");
     },
     create: function(){
         this.game.state.start("GameTitle");
