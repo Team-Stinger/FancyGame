@@ -1,4 +1,6 @@
 .idea/
-bower_components/phaser/
+bower_components/phaser/*
+!bower_components/phaser/build
+bower_components/phaser/build/*
 !bower_components/phaser/build/phaser.js
 !bower_components/phaser/build/phaser.min.js
