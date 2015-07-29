@@ -19,6 +19,8 @@ theGame.prototype = {
             this.game.physics.arcade.enable(doggy);
             doggy.inputEnabled=true;
 
+            this.game.time.events.loop(Phaser.Timer.SECOND, this.enemyFactory, this);
+
 
     },
     update: function(){
@@ -27,7 +29,7 @@ theGame.prototype = {
         doggy.animations.play('walk',10,true);
         doggy.body.velocity.x = + 100;
         doggy.events.onInputDown.add(this.killDog, this);
-        this.gameOver();
+        //this.gameOver();
 
     },
     gameOver: function(){
@@ -35,9 +37,9 @@ theGame.prototype = {
             this.game.state.start("GameOver", true, false, score);
         }
     },
-    killDog: function(){
-        
-         doggy.kill();
+    killDog: function(currentDog){
+
+        currentDog.kill();
          score++;
     },
     moveTheGun: function () {
@@ -54,5 +56,11 @@ theGame.prototype = {
         else if (gunny.y > this.game.input.mousePointer.y && gunny.y > 350) {
             gunny.y -= 1;
         }
+    },
+    enemyFactory: function() {
+        doggy = this.game.add.sprite(30, Math.random() * 470, 'dog');
+        doggy.animations.add('walk', [0, 1, 2, 3, 4, 5]);
+        this.game.physics.arcade.enable(doggy);
+        doggy.inputEnabled = true;
     }
 };
