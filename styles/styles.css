@@ -3,12 +3,13 @@ body {
 }
 
 .game {
-    width: 400px;
+    width: 360px;
     height: 120px;
     font-size: 40px;
-    margin: 2%;
-    background-color: tomato;
-    color: darkslategrey;
+    font-style: italic;
+    margin: 8%;
+    background-color: forestgreen;
+    color: floralwhite;
 }
 
 .modalDialog {
