@@ -43,11 +43,11 @@ theGame.prototype = {
         leftMovingEnemies.callAll('animations.play', 'animations', 'walk', 10, true);
         leftMovingEnemies.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
         leftMovingEnemies.addAll('x', -3);
-        //this.gameOver();
+        this.gameOver();
 
     },
     gameOver: function(){
-        if(score==1) {
+        if(score==3) {
             this.game.state.start("GameOver", true, false, score);
         }
     },

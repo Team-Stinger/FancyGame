@@ -19,7 +19,7 @@ preload.prototype = {
         this.game.load.image("gametitle","resources/images/Title.png");
         this.game.load.image("play","resources/images/playButton.jpg");
         this.game.load.image("gun","resources/images/machineGun.png");
-        this.game.load.image("gameover","resources/images/gameOver.png");
+        this.game.load.image("gameover","resources/images/Game_over.jpg");
     },
     create: function(){
         this.game.state.start("GameTitle");

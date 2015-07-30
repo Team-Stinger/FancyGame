@@ -7,12 +7,13 @@ var boot = function(game){
 
 boot.prototype = {
     preload: function(){
+
         this.game.load.image("loading","resources/images/load.png");
     },
     create: function(){
-        this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        this.game.scale.pageAlignHorizontally = true;
-        //this.game.scale.setScreenSize();
+       this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+       this.game.scale.pageAlignHorizontally = true;
+       // this.game.scale.setScreenSize();
         this.game.state.start("Preload");
     }
 };
