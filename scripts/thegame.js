@@ -28,6 +28,15 @@ theGame.prototype = {
             leftMovingEnemies.create(550, 50, 'turtleLeft');
             leftMovingEnemies.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
             leftMovingEnemies.setAll('inputEnabled', true);
+			
+			pause = this.game.add.sprite(0, 523, "pause");
+			pause.inputEnabled = true;
+            pause.events.onInputUp.add(function () {
+            this.game.paused = true;
+            }, this);
+            this.game.input.onDown.add(function () {
+            if (this.game.paused)this.game.paused = false;
+            }, this);
 
             this.game.time.events.loop(Phaser.Timer.SECOND, this.enemyFactory, this);
 

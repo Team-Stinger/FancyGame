@@ -16,6 +16,7 @@ preload.prototype = {
         this.game.load.spritesheet("raccoon","resources/images/raccoonSpriteLeft.png",32,18);
         this.game.load.spritesheet("turtleLeft","resources/images/turtleSpriteLeft.png",85,64);
         this.game.load.image("background","resources/images/bg.jpg");
+		this.game.load.image('pause', 'resources/images/pause.jpg');
         this.game.load.image("gametitle","resources/images/Title.png");
         this.game.load.image("play","resources/images/playButton.jpg");
         this.game.load.image("gun","resources/images/machineGun.png");
