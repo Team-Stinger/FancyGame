@@ -21,6 +21,10 @@ preload.prototype = {
         this.game.load.image("play","resources/images/playButton.jpg");
         this.game.load.image("gun","resources/images/machineGun.png");
         this.game.load.image("gameover","resources/images/Game_over.jpg");
+		this.game.load.audio('shootingSound', "resources/audio/shortSound.mp3");
+        this.game.load.audio('backgroundSound',"resources/audio/backgroundMusic1.mp3");
+        this.game.load.audio('hittedCreatureSound',"resources/audio/hittedCreatureSound");
+
     },
     create: function(){
         this.game.state.start("GameTitle");

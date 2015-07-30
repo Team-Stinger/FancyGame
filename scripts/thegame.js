@@ -14,7 +14,7 @@ theGame.prototype = {
     create: function(){
             score=0;
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
-            this.game.add.sprite(0,0,'background');
+			background = this.game.add.sprite(0, 0, 'background');
             gunny = this.game.add.sprite(400,450,"gun");
             this.game.physics.arcade.enable(gunny);
 
@@ -28,6 +28,20 @@ theGame.prototype = {
             leftMovingEnemies.create(550, 50, 'turtleLeft');
             leftMovingEnemies.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
             leftMovingEnemies.setAll('inputEnabled', true);
+			
+			shootingGun = this.game.add.audio('shootingSound');
+			shootingGun.allowMultiple = true;
+			
+			hitAnimalSound = this.game.add.audio('hittedCreatureSound');
+			hitAnimalSound.allowMultiple = true;
+
+			music = this.game.add.audio('backgroundSound');
+			music.play();
+
+			background.inputEnabled = true;
+			background.events.onInputDown.add(function () {
+			   shootingGun.play();
+			}, this);
 			
 			pause = this.game.add.sprite(0, 523, "pause");
 			pause.inputEnabled = true;
@@ -61,7 +75,8 @@ theGame.prototype = {
         }
     },
     killDog: function(currentDog){
-
+		shootingGun.play();
+		hitAnimalSound.play();
         currentDog.kill();
          score++;
     },
