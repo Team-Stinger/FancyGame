@@ -6,6 +6,9 @@ var theGame = function(game){
      doggy=null;
 };
 
+var rightAnimals = ['turtle', 'camel', 'fox'],
+    leftAnimals = ['blueBird', 'turtleLeft', 'raccoon'];
+
 theGame.prototype = {
 
     create: function(){
@@ -69,6 +72,12 @@ theGame.prototype = {
         }
     },
     enemyFactory: function() {
+        rightMovingEnemies.create(30, Math.random() * 450, rightAnimals[Math.random() * 3 | 0]);
+        rightMovingEnemies.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
+        rightMovingEnemies.setAll('inputEnabled', true);
 
+        leftMovingEnemies.create(550, Math.random() * 450, leftAnimals[Math.random() * 3 | 0]);
+        leftMovingEnemies.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
+        leftMovingEnemies.setAll('inputEnabled', true);
     }
 };
