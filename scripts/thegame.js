@@ -69,6 +69,6 @@ theGame.prototype = {
         }
     },
     enemyFactory: function() {
-        
+
     }
 };
