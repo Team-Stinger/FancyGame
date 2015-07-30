@@ -14,10 +14,17 @@ theGame.prototype = {
             this.game.add.sprite(0,0,'background');
             gunny = this.game.add.sprite(400,450,"gun");
             this.game.physics.arcade.enable(gunny);
-            doggy= this.game.add.sprite(30, 470, 'dog');
-            doggy.animations.add('walk', [0, 1, 2, 3, 4, 5]);
-            this.game.physics.arcade.enable(doggy);
-            doggy.inputEnabled=true;
+
+            rightMovingEnemies = this.game.add.group();
+            leftMovingEnemies = this.game.add.group();
+
+            rightMovingEnemies.create(30, 450, 'turtle');
+            rightMovingEnemies.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
+            rightMovingEnemies.setAll('inputEnabled', true);
+
+            leftMovingEnemies.create(550, 50, 'turtleLeft');
+            leftMovingEnemies.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
+            leftMovingEnemies.setAll('inputEnabled', true);
 
             this.game.time.events.loop(Phaser.Timer.SECOND, this.enemyFactory, this);
 
@@ -26,9 +33,13 @@ theGame.prototype = {
     update: function(){
         this.game.input.addMoveCallback(this.moveTheGun, gunny);
 
-        doggy.animations.play('walk',10,true);
-        doggy.body.velocity.x = + 100;
-        doggy.events.onInputDown.add(this.killDog, this);
+        rightMovingEnemies.callAll('animations.play', 'animations', 'walk', 10, true);
+        rightMovingEnemies.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
+        rightMovingEnemies.addAll('x', 3);
+
+        leftMovingEnemies.callAll('animations.play', 'animations', 'walk', 10, true);
+        leftMovingEnemies.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
+        leftMovingEnemies.addAll('x', -3);
         //this.gameOver();
 
     },
@@ -58,9 +69,6 @@ theGame.prototype = {
         }
     },
     enemyFactory: function() {
-        doggy = this.game.add.sprite(30, Math.random() * 470, 'dog');
-        doggy.animations.add('walk', [0, 1, 2, 3, 4, 5]);
-        this.game.physics.arcade.enable(doggy);
-        doggy.inputEnabled = true;
+        
     }
 };
