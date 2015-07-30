@@ -3,7 +3,7 @@ var gameOver = (function(){
 
     gameOver.prototype = {
         init: function(score){
-            alert("You scored: "+score)
+            alert("You scored: "+ score)
         },
         create: function(){
             var bg= this.game.add.sprite(0,0,"background");
