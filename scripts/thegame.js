@@ -15,6 +15,7 @@ var theGame = (function(){
         shootingGunSound,
         hitAnimalSound,
         music,
+		gameOverSound,
         pause,
         aim,
         scoreCount,
@@ -63,8 +64,9 @@ var theGame = (function(){
             music = this.game.add.audio('backgroundSound');
             music.loop=true;
             music.play();
-
-
+			
+			gameOverSound = this.game.add.audio('endGameSound');
+			
             background.inputEnabled = true;
             background.events.onInputDown.add(function () {
                 shootingGunSound.play();
@@ -182,6 +184,7 @@ var theGame = (function(){
             lives -= 1;
 
             if (lives === 0) {
+				gameOverSound.play();
                 window.location = 'ReloadPage.php?score='+score;
                 this.game.state.start("GameOver", true, false, score);
                 scoreCount.remove();

@@ -30,6 +30,7 @@ var preload = (function(){
             this.game.load.audio('shootingSound', "resources/audio/shortSound.mp3");
             this.game.load.audio('backgroundSound', "resources/audio/backgroundMusic1.mp3");
             this.game.load.audio('hittedCreatureSound', "resources/audio/hittedCreatureSound");
+			this.game.load.audio('endGameSound', "resources/audio/gameOverSound");
 
             this.game.load.image("gametitle","resources/images/Title.png");
             this.game.load.image("play","resources/images/playButton.png");
