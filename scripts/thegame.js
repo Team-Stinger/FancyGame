@@ -163,9 +163,7 @@ var theGame = (function(){
 
             scoreCount.textContent = score;
             svgLivesCounter.textContent = lives;
-            
-            
-
+            gunny.bringToTop();
         },
         gameOver: function(){
             lives -= 1;
