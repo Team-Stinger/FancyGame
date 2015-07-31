@@ -80,31 +80,31 @@ var theGame = (function(){
             aim.y = this.game.input.mousePointer.y - aim.width / 2;
 
             walkingLeft.callAll('animations.play', 'animations', 'walk', 10, true);
-            walkingLeft.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
+            walkingLeft.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
             walkingLeft.addAll('x', -3);
 
             walkingRight.callAll('animations.play', 'animations', 'walk', 10, true);
-            walkingRight.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
+            walkingRight.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
             walkingRight.addAll('x', 3);
 
             flyingLeft.callAll('animations.play', 'animations', 'walk', 10, true);
-            flyingLeft.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
+            flyingLeft.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
             flyingLeft.addAll('x', -3);
 
             flyingRight.callAll('animations.play', 'animations', 'walk', 10, true);
-            flyingRight.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
+            flyingRight.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
             flyingRight.addAll('x', 3);
 
             boss.callAll('animations.play', 'animations', 'walk', 10, true);
-            boss.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
+            boss.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
             boss.addAll('x', -3);
 
             phoenixLeft.callAll('animations.play', 'animations', 'walk', 10, true);
-            phoenixLeft.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
+            phoenixLeft.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
             phoenixLeft.addAll('x', -3);
 
             phoenixRight.callAll('animations.play', 'animations', 'walk', 10, true);
-            phoenixRight.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
+            phoenixRight.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
             phoenixRight.addAll('x', 3);
 
             this.gameOver();
@@ -115,7 +115,7 @@ var theGame = (function(){
                 this.game.state.start("GameOver", true, false, score);
             }
         },
-        killDog: function(currentDog){
+        killAnimal: function(currentDog){
             shootingGun.play();
             hitAnimalSound.play();
             currentDog.kill();
