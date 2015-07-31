@@ -7,7 +7,16 @@ var theGame = function(game){
 };
 
 var rightAnimals = ['turtle', 'camel', 'fox'],
-    leftAnimals = ['blueBird', 'turtleLeft', 'raccoon'];
+    leftAnimals = ['blueBird', 'turtleLeft', 'raccoon'],
+    walkingLeftSprites = ['turtleLeft', 'raccoon'],
+    walkingRightSprites = ['turtle', 'camel', 'fox'],
+    flyingLeftSprites = ['blueBirdLeft'],
+    flyingRightSprites = ['blueBirdRight'],
+    bossSprites = ['boss'],
+    phoenixLeftSprites = ['phoenixLeft'],
+    phoenixRightSprites = ['phoenixRight'],
+    score = 0,
+    aim;
 
 theGame.prototype = {
 
@@ -21,16 +30,13 @@ theGame.prototype = {
         aim = this.game.add.sprite(this.game.input.mousePointer.x, this.game.input.mousePointer.y, 'aim');
         aim.scale.set(0.1, 0.1);
 
-            rightMovingEnemies = this.game.add.group();
-            leftMovingEnemies = this.game.add.group();
-
-            rightMovingEnemies.create(30, 450, 'turtle');
-            rightMovingEnemies.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
-            rightMovingEnemies.setAll('inputEnabled', true);
-
-            leftMovingEnemies.create(550, 50, 'turtleLeft');
-            leftMovingEnemies.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
-            leftMovingEnemies.setAll('inputEnabled', true);
+        walkingLeft = this.game.add.group();
+        walkingRight = this.game.add.group();
+        flyingLeft = this.game.add.group();
+        flyingRight = this.game.add.group();
+        boss = this.game.add.group();
+        phoenixLeft = this.game.add.group();
+        phoenixRight = this.game.add.group();
 			
 			shootingGun = this.game.add.audio('shootingSound');
 			shootingGun.allowMultiple = true;
@@ -65,13 +71,34 @@ theGame.prototype = {
         aim.x = this.game.input.mousePointer.x - aim.width / 2;
         aim.y = this.game.input.mousePointer.y - aim.width / 2;
 
-        rightMovingEnemies.callAll('animations.play', 'animations', 'walk', 10, true);
-        rightMovingEnemies.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
-        rightMovingEnemies.addAll('x', 3);
+        walkingLeft.callAll('animations.play', 'animations', 'walk', 10, true);
+        walkingLeft.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
+        walkingLeft.addAll('x', -3);
 
-        leftMovingEnemies.callAll('animations.play', 'animations', 'walk', 10, true);
-        leftMovingEnemies.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
-        leftMovingEnemies.addAll('x', -3);
+        walkingRight.callAll('animations.play', 'animations', 'walk', 10, true);
+        walkingRight.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
+        walkingRight.addAll('x', 3);
+
+        flyingLeft.callAll('animations.play', 'animations', 'walk', 10, true);
+        flyingLeft.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
+        flyingLeft.addAll('x', -3);
+
+        flyingRight.callAll('animations.play', 'animations', 'walk', 10, true);
+        flyingRight.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
+        flyingRight.addAll('x', 3);
+
+        boss.callAll('animations.play', 'animations', 'walk', 10, true);
+        boss.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
+        boss.addAll('x', -3);
+
+        phoenixLeft.callAll('animations.play', 'animations', 'walk', 10, true);
+        phoenixLeft.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
+        phoenixLeft.addAll('x', -3);
+
+        phoenixRight.callAll('animations.play', 'animations', 'walk', 10, true);
+        phoenixRight.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
+        phoenixRight.addAll('x', 3);
+
         this.gameOver();
 
     },
@@ -102,12 +129,57 @@ theGame.prototype = {
         }
     },
     enemyFactory: function() {
-        rightMovingEnemies.create(30, Math.random() * 450, rightAnimals[Math.random() * 3 | 0]);
-        rightMovingEnemies.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
-        rightMovingEnemies.setAll('inputEnabled', true);
+        var random = Math.random() * 2 | 0,
+            bossRandom = Math.random() * 100 | 0;
 
-        leftMovingEnemies.create(550, Math.random() * 450, leftAnimals[Math.random() * 3 | 0]);
-        leftMovingEnemies.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
-        leftMovingEnemies.setAll('inputEnabled', true);
+        if(bossRandom % 10 === 0) {
+            this.createBoss();
+        }
+
+        switch(random) {
+            case 0: this.createFlyingLeftAnimals();
+                this.createWalkingRightAnimals(); break;
+
+            case 1: this.createPhoenixRightAnimals();
+                this.createWalkingLeftAnimals(); break;
+
+            case 2: this.createFlyingRightAnimals();
+                this.createPhoenixLeftAnimals(); break;
+        }
+    },
+    createWalkingLeftAnimals: function() {
+        walkingLeft.create(750, 450 - Math.random() * 100, walkingLeftSprites[Math.random() * 2 | 0]);
+        walkingLeft.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
+        walkingLeft.setAll('inputEnabled', true);
+    },
+    createWalkingRightAnimals: function() {
+        walkingRight.create(30, 450 - Math.random() * 100, walkingRightSprites[Math.random() * 3 | 0]);
+        walkingRight.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
+        walkingRight.setAll('inputEnabled', true);
+    },
+    createFlyingLeftAnimals: function() {
+        flyingLeft.create(750,  Math.random() * 200, flyingLeftSprites[0]);
+        flyingLeft.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
+        flyingLeft.setAll('inputEnabled', true);
+    },
+    createFlyingRightAnimals: function() {
+        flyingRight.create(30, Math.random() * 200, flyingRightSprites[0]);
+        flyingRight.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
+        flyingRight.setAll('inputEnabled', true);
+    },
+    createBoss: function() {
+        boss.create(750,  450 - Math.random() * 100, bossSprites[0]);
+        boss.callAll('animations.add', 'animations', 'walk', [0, 1, 2, 4, 5]);
+        boss.setAll('inputEnabled', true);
+    },
+    createPhoenixLeftAnimals: function() {
+        phoenixLeft.create(750,  Math.random() * 200, phoenixLeftSprites[0]);
+        phoenixLeft.callAll('animations.add', 'animations', 'walk', [0, 1, 2, 3]);
+        phoenixLeft.setAll('inputEnabled', true);
+    },
+    createPhoenixRightAnimals: function() {
+        phoenixRight.create(30, Math.random() * 200, phoenixRightSprites[0]);
+        phoenixRight.callAll('animations.add', 'animations', 'walk', [0, 1, 2, 3]);
+        phoenixRight.setAll('inputEnabled', true);
     }
 };

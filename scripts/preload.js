@@ -12,7 +12,7 @@ preload.prototype = {
         this.game.load.spritesheet("turtle","resources/images/turtleSpriteRight.png",85,66);
         this.game.load.spritesheet("camel","resources/images/camalSprite.png",80,57);
         this.game.load.spritesheet("fox","resources/images/foxSpriteRight.png",48,29);
-        this.game.load.spritesheet("blueBird","resources/images/blueBirdLeft.png",109,82);
+        this.game.load.spritesheet("blueBirdLeft","resources/images/blueBirdLeft.png",109,82);
         this.game.load.spritesheet("blueBirdRight","resources/images/blueBirdRight.png",109,82);
         this.game.load.spritesheet("raccoon","resources/images/raccoonSpriteLeft.png",32,18);
         this.game.load.spritesheet("turtleLeft","resources/images/turtleSpriteLeft.png",85,64);
