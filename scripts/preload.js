@@ -22,9 +22,9 @@ var preload = (function () {
             this.game.load.image("aim", "resources/images/Aim.png");
             this.game.load.image('pause', 'resources/images/pause.png');
             this.game.load.image("gametitle", "resources/images/Title.png");
-            this.game.load.image("play", "resources/images/playButton.jpg");
+            this.game.load.image("play", "resources/images/playButton.png");
             this.game.load.image("gun", "resources/images/machineGun.png");
-            this.game.load.image("gameover", "resources/images/Game_over.jpg");
+            this.game.load.image("gameover", "resources/images/Game_over.png");
             this.game.load.image("bulletHole", "resources/images/bulletHole.png");
             this.game.load.audio('shootingSound', "resources/audio/shortSound.mp3");
             this.game.load.audio('backgroundSound', "resources/audio/backgroundMusic1.mp3");

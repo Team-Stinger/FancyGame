@@ -9,15 +9,16 @@
     <script type="text/javascript" src="scripts/gameover.js"></script>
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/styleSVG.css">
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
 <body>
     <svg id="the-svg" width="150" height="200"></svg>
-</body>
+ </body>
 <script>
     (function () {
         var game;
         game = new Phaser.Game(800, 600, Phaser.CANVAS, "game");
-        $(game).css("cursor", "pointer");
+//        $(game).css("cursor", "pointer");
 
         game.state.add("Boot", boot);
         game.state.add("Preload", preload);

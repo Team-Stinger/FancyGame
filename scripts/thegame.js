@@ -1,4 +1,3 @@
-
 var theGame = (function () {
     var theGame = function (game) {
     };
@@ -77,6 +76,7 @@ var theGame = (function () {
                 if (this.game.paused) this.game.paused = false;
             }, this);
 
+
             this.game.time.events.loop(Phaser.Timer.SECOND, this.enemyFactory, this);
 
             svg = document.getElementById('the-svg');
@@ -116,7 +116,15 @@ var theGame = (function () {
         },
         update: function () {
             this.game.input.addMoveCallback(this.moveTheGun, gunny);
-
+            console.log(this.game.input.mousePointer.y);
+            console.log(pause.y);
+            if ((this.game.input.mousePointer.x < (pause.x + pause.width) &&this.game.input.mousePointer.x>0)&&
+                (this.game.input.mousePointer.y > pause.y && this.game.input.mousePointer.y < (pause.y+pause.height))
+            ) {
+                this.game.canvas.style.cursor = 'pointer';
+            } else {
+                this.game.canvas.style.cursor = 'none';
+            }
             aim.x = this.game.input.mousePointer.x - aim.width / 2;
             aim.y = this.game.input.mousePointer.y - aim.width / 2;
 
@@ -169,18 +177,20 @@ var theGame = (function () {
         gameOver: function () {
             lives -= 1;
             if (lives === 0) {
+                window.location = 'ReloadPage.php?score='+score;
                 this.game.state.start("GameOver", true, false, score);
                 scoreCount.remove();
                 svgLivesCounter.remove();
                 score = 0;
                 lives = 5;
+
             }
         },
         killAnimal: function (currentAnimal) {
             var hole = this.game.add.sprite(currentAnimal.x, currentAnimal.y, "bulletHole");
             hole.alpha = 1;
             hole.scale.setTo(0.5, 0.5);
-            this.game.add.tween(hole).to({ alpha: 0 }, 1000, "Linear", true);
+            this.game.add.tween(hole).to({alpha: 0}, 1000, "Linear", true);
             shootingGunSound.play();
             hitAnimalSound.play();
             currentAnimal.kill();
@@ -210,14 +220,20 @@ var theGame = (function () {
             }
 
             switch (random) {
-                case 0: this.createFlyingLeftAnimals();
-                    this.createWalkingRightAnimals(); break;
+                case 0:
+                    this.createFlyingLeftAnimals();
+                    this.createWalkingRightAnimals();
+                    break;
 
-                case 1: this.createPhoenixRightAnimals();
-                    this.createWalkingLeftAnimals(); break;
+                case 1:
+                    this.createPhoenixRightAnimals();
+                    this.createWalkingLeftAnimals();
+                    break;
 
-                case 2: this.createFlyingRightAnimals();
-                    this.createPhoenixLeftAnimals(); break;
+                case 2:
+                    this.createFlyingRightAnimals();
+                    this.createPhoenixLeftAnimals();
+                    break;
             }
         },
         createWalkingLeftAnimals: function () {

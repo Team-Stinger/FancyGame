@@ -3,12 +3,14 @@ body {
     background-image: url("../resources/images/forest.jpg");
 }
 
+
+
 .game {
-    width: 360px;
+    width: 500px;
     height: 120px;
     font-size: 40px;
     font-style: italic;
-    margin: 6%;
+    margin: 3%;
     margin-left: 35%;
     background-color: forestgreen;
     color: floralwhite;
@@ -45,4 +47,28 @@ body {
         background: -moz-linear-gradient(#fff, #999);
         background: -webkit-linear-gradient(#fff, #999);
         background: -o-linear-gradient(#fff, #999);
+    }
+    
+    .hidden{
+        display: none;
+
+
+
+    }
+
+
+    #scores{
+
+        position: absolute;
+        top: 20px;
+        margin: 50px;
+
+        color: #ffffff;
+        font-size: 45px;
+    }
+
+    #info{
+        position: absolute;
+        top: 0px;
+        color: #ffffff;
     }
