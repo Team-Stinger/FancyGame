@@ -5,15 +5,28 @@ var theGame = (function(){
         doggy=null;
     };
 
-    var walkingLeftSprites = ['turtleLeft', 'raccoon'],
+    var background,
+        gunny,
+        walkingLeft,
+        walkingRight,
+        flyingLeft,
+        flyingRight,
+        boss,
+        phoenixLeft,
+        phoenixRight,
+        shootingGun,
+        hitAnimalSound,
+        music,
+        pause,
+        aim,
+        walkingLeftSprites = ['turtleLeft', 'raccoon'],
         walkingRightSprites = ['turtle', 'camel', 'fox'],
         flyingLeftSprites = ['blueBirdLeft'],
         flyingRightSprites = ['blueBirdRight'],
         bossSprites = ['boss'],
         phoenixLeftSprites = ['phoenixLeft'],
         phoenixRightSprites = ['phoenixRight'],
-        score = 0,
-        aim;
+        score = 0;
 
     theGame.prototype = {
 
