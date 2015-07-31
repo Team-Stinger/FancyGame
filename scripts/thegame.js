@@ -1,8 +1,6 @@
 
 var theGame = (function(){
     var theGame = function(game){
-        score = 0;
-        doggy=null;
     };
 
     var background,
@@ -31,7 +29,7 @@ var theGame = (function(){
     theGame.prototype = {
 
         create: function(){
-            score=0;
+            this.game.canvas.style.cursor = 'none';
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
             background = this.game.add.sprite(0, 0, 'background');
             gunny = this.game.add.sprite(400,450,"gun");
