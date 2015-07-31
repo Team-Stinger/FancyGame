@@ -27,13 +27,15 @@ var theGame = (function(){
         bossSprites = ['boss'],
         phoenixLeftSprites = ['phoenixLeft'],
         phoenixRightSprites = ['phoenixRight'],
-        score = 0;
+        score = 0,
+        lives = 5;
 
     theGame.prototype = {
 
         create: function(){
             this.game.canvas.style.cursor = 'none';
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
+            this.game.physics.setBoundsToWorld();
             background = this.game.add.sprite(0, 0, 'background');
             gunny = this.game.add.sprite(400,450,"gun");
             this.game.physics.arcade.enable(gunny);
@@ -102,42 +104,57 @@ var theGame = (function(){
             walkingLeftGroup.callAll('animations.play', 'animations', 'walk', 10, true);
             walkingLeftGroup.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
             walkingLeftGroup.addAll('x', -3);
+            walkingLeftGroup.setAll('checkWorldBounds', true);
+            walkingLeftGroup.callAll('events.onOutOfBounds.add', 'events.onOutOfBounds', this.gameOver, this);
 
             walkingRightGroup.callAll('animations.play', 'animations', 'walk', 10, true);
             walkingRightGroup.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
             walkingRightGroup.addAll('x', 3);
+            walkingRightGroup.setAll('checkWorldBounds', true);
+            walkingRightGroup.callAll('events.onOutOfBounds.add', 'events.onOutOfBounds', this.gameOver, this);
 
             flyingLeftGroup.callAll('animations.play', 'animations', 'walk', 10, true);
             flyingLeftGroup.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
             flyingLeftGroup.addAll('x', -3);
-
+            flyingLeftGroup.setAll('checkWorldBounds', true);
+            flyingLeftGroup.callAll('events.onOutOfBounds.add', 'events.onOutOfBounds', this.gameOver, this);
+            
             flyingRightGroup.callAll('animations.play', 'animations', 'walk', 10, true);
             flyingRightGroup.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
             flyingRightGroup.addAll('x', 3);
+            flyingRightGroup.setAll('checkWorldBounds', true);
+            flyingRightGroup.callAll('events.onOutOfBounds.add', 'events.onOutOfBounds', this.gameOver, this);
 
             bossGroup.callAll('animations.play', 'animations', 'walk', 10, true);
             bossGroup.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
             bossGroup.addAll('x', -3);
+            bossGroup.setAll('checkWorldBounds', true);
+            bossGroup.callAll('events.onOutOfBounds.add', 'events.onOutOfBounds', this.gameOver, this);
 
             phoenixLeftGroup.callAll('animations.play', 'animations', 'walk', 10, true);
             phoenixLeftGroup.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
             phoenixLeftGroup.addAll('x', -3);
+            phoenixLeftGroup.setAll('checkWorldBounds', true);
+            phoenixLeftGroup.callAll('events.onOutOfBounds.add', 'events.onOutOfBounds', this.gameOver, this);
 
             phoenixRightGroup.callAll('animations.play', 'animations', 'walk', 10, true);
             phoenixRightGroup.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
             phoenixRightGroup.addAll('x', 3);
+            phoenixRightGroup.setAll('checkWorldBounds', true);
+            phoenixRightGroup.callAll('events.onOutOfBounds.add', 'events.onOutOfBounds', this.gameOver, this);
 
             scoreCount.textContent = score;
-            this.gameOver();
+            
             
 
         },
         gameOver: function(){
-            if(score==3) {
+            if(lives === 0) {
                 this.game.state.start("GameOver", true, false, score);
                 scoreCount.remove();
                 score = 0;
             }
+            lives -= 1;
         },
         killAnimal: function(currentDog){
             shootingGunSound.play();
