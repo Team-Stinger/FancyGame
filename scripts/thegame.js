@@ -5,14 +5,14 @@ var theGame = (function(){
 
     var background,
         gunny,
-        walkingLeft,
-        walkingRight,
-        flyingLeft,
-        flyingRight,
-        boss,
-        phoenixLeft,
-        phoenixRight,
-        shootingGun,
+        walkingLeftGroup,
+        walkingRightGroup,
+        flyingLeftGroup,
+        flyingRightGroup,
+        bossGroup,
+        phoenixLeftGroup,
+        phoenixRightGroup,
+        shootingGunSound,
         hitAnimalSound,
         music,
         pause,
@@ -38,16 +38,16 @@ var theGame = (function(){
             aim = this.game.add.sprite(this.game.input.mousePointer.x, this.game.input.mousePointer.y, 'aim');
             aim.scale.set(0.1, 0.1);
 
-            walkingLeft = this.game.add.group();
-            walkingRight = this.game.add.group();
-            flyingLeft = this.game.add.group();
-            flyingRight = this.game.add.group();
-            boss = this.game.add.group();
-            phoenixLeft = this.game.add.group();
-            phoenixRight = this.game.add.group();
+            walkingLeftGroup = this.game.add.group();
+            walkingRightGroup = this.game.add.group();
+            flyingLeftGroup = this.game.add.group();
+            flyingRightGroup = this.game.add.group();
+            bossGroup = this.game.add.group();
+            phoenixLeftGroup = this.game.add.group();
+            phoenixRightGroup = this.game.add.group();
 
-            shootingGun = this.game.add.audio('shootingSound');
-            shootingGun.allowMultiple = true;
+            shootingGunSound = this.game.add.audio('shootingSound');
+            shootingGunSound.allowMultiple = true;
 
             hitAnimalSound = this.game.add.audio('hittedCreatureSound');
             hitAnimalSound.allowMultiple = true;
@@ -57,7 +57,7 @@ var theGame = (function(){
 
             background.inputEnabled = true;
             background.events.onInputDown.add(function () {
-                shootingGun.play();
+                shootingGunSound.play();
             }, this);
 
             pause = this.game.add.sprite(0, 523, "pause");
@@ -79,33 +79,33 @@ var theGame = (function(){
             aim.x = this.game.input.mousePointer.x - aim.width / 2;
             aim.y = this.game.input.mousePointer.y - aim.width / 2;
 
-            walkingLeft.callAll('animations.play', 'animations', 'walk', 10, true);
-            walkingLeft.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
-            walkingLeft.addAll('x', -3);
+            walkingLeftGroup.callAll('animations.play', 'animations', 'walk', 10, true);
+            walkingLeftGroup.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
+            walkingLeftGroup.addAll('x', -3);
 
-            walkingRight.callAll('animations.play', 'animations', 'walk', 10, true);
-            walkingRight.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
-            walkingRight.addAll('x', 3);
+            walkingRightGroup.callAll('animations.play', 'animations', 'walk', 10, true);
+            walkingRightGroup.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
+            walkingRightGroup.addAll('x', 3);
 
-            flyingLeft.callAll('animations.play', 'animations', 'walk', 10, true);
-            flyingLeft.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
-            flyingLeft.addAll('x', -3);
+            flyingLeftGroup.callAll('animations.play', 'animations', 'walk', 10, true);
+            flyingLeftGroup.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
+            flyingLeftGroup.addAll('x', -3);
 
-            flyingRight.callAll('animations.play', 'animations', 'walk', 10, true);
-            flyingRight.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
-            flyingRight.addAll('x', 3);
+            flyingRightGroup.callAll('animations.play', 'animations', 'walk', 10, true);
+            flyingRightGroup.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
+            flyingRightGroup.addAll('x', 3);
 
-            boss.callAll('animations.play', 'animations', 'walk', 10, true);
-            boss.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
-            boss.addAll('x', -3);
+            bossGroup.callAll('animations.play', 'animations', 'walk', 10, true);
+            bossGroup.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
+            bossGroup.addAll('x', -3);
 
-            phoenixLeft.callAll('animations.play', 'animations', 'walk', 10, true);
-            phoenixLeft.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
-            phoenixLeft.addAll('x', -3);
+            phoenixLeftGroup.callAll('animations.play', 'animations', 'walk', 10, true);
+            phoenixLeftGroup.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
+            phoenixLeftGroup.addAll('x', -3);
 
-            phoenixRight.callAll('animations.play', 'animations', 'walk', 10, true);
-            phoenixRight.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
-            phoenixRight.addAll('x', 3);
+            phoenixRightGroup.callAll('animations.play', 'animations', 'walk', 10, true);
+            phoenixRightGroup.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
+            phoenixRightGroup.addAll('x', 3);
 
             this.gameOver();
 
@@ -116,7 +116,7 @@ var theGame = (function(){
             }
         },
         killAnimal: function(currentDog){
-            shootingGun.play();
+            shootingGunSound.play();
             hitAnimalSound.play();
             currentDog.kill();
             score++;
@@ -156,39 +156,39 @@ var theGame = (function(){
             }
         },
         createWalkingLeftAnimals: function() {
-            walkingLeft.create(750, 450 - Math.random() * 100, walkingLeftSprites[Math.random() * 2 | 0]);
-            walkingLeft.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
-            walkingLeft.setAll('inputEnabled', true);
+            walkingLeftGroup.create(750, 450 - Math.random() * 100, walkingLeftSprites[Math.random() * 2 | 0]);
+            walkingLeftGroup.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
+            walkingLeftGroup.setAll('inputEnabled', true);
         },
         createWalkingRightAnimals: function() {
-            walkingRight.create(30, 450 - Math.random() * 100, walkingRightSprites[Math.random() * 3 | 0]);
-            walkingRight.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
-            walkingRight.setAll('inputEnabled', true);
+            walkingRightGroup.create(30, 450 - Math.random() * 100, walkingRightSprites[Math.random() * 3 | 0]);
+            walkingRightGroup.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
+            walkingRightGroup.setAll('inputEnabled', true);
         },
         createFlyingLeftAnimals: function() {
-            flyingLeft.create(750,  Math.random() * 200, flyingLeftSprites[0]);
-            flyingLeft.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
-            flyingLeft.setAll('inputEnabled', true);
+            flyingLeftGroup.create(750,  Math.random() * 200, flyingLeftSprites[0]);
+            flyingLeftGroup.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
+            flyingLeftGroup.setAll('inputEnabled', true);
         },
         createFlyingRightAnimals: function() {
-            flyingRight.create(30, Math.random() * 200, flyingRightSprites[0]);
-            flyingRight.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
-            flyingRight.setAll('inputEnabled', true);
+            flyingRightGroup.create(30, Math.random() * 200, flyingRightSprites[0]);
+            flyingRightGroup.callAll('animations.add', 'animations', 'walk', [0, 1, 2]);
+            flyingRightGroup.setAll('inputEnabled', true);
         },
         createBoss: function() {
-            boss.create(750,  450 - Math.random() * 100, bossSprites[0]);
-            boss.callAll('animations.add', 'animations', 'walk', [0, 1, 2, 4, 5]);
-            boss.setAll('inputEnabled', true);
+            bossGroup.create(750,  450 - Math.random() * 100, bossSprites[0]);
+            bossGroup.callAll('animations.add', 'animations', 'walk', [0, 1, 2, 4, 5]);
+            bossGroup.setAll('inputEnabled', true);
         },
         createPhoenixLeftAnimals: function() {
-            phoenixLeft.create(750,  Math.random() * 200, phoenixLeftSprites[0]);
-            phoenixLeft.callAll('animations.add', 'animations', 'walk', [0, 1, 2, 3]);
-            phoenixLeft.setAll('inputEnabled', true);
+            phoenixLeftGroup.create(750,  Math.random() * 200, phoenixLeftSprites[0]);
+            phoenixLeftGroup.callAll('animations.add', 'animations', 'walk', [0, 1, 2, 3]);
+            phoenixLeftGroup.setAll('inputEnabled', true);
         },
         createPhoenixRightAnimals: function() {
-            phoenixRight.create(30, Math.random() * 200, phoenixRightSprites[0]);
-            phoenixRight.callAll('animations.add', 'animations', 'walk', [0, 1, 2, 3]);
-            phoenixRight.setAll('inputEnabled', true);
+            phoenixRightGroup.create(30, Math.random() * 200, phoenixRightSprites[0]);
+            phoenixRightGroup.callAll('animations.add', 'animations', 'walk', [0, 1, 2, 3]);
+            phoenixRightGroup.setAll('inputEnabled', true);
         }
     };
 
