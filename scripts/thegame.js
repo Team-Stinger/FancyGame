@@ -17,6 +17,9 @@ var theGame = (function(){
         music,
         pause,
         aim,
+        scoreCount,
+        scoreText,
+        svg,
         walkingLeftSprites = ['turtleLeft', 'raccoon'],
         walkingRightSprites = ['turtle', 'camel', 'fox'],
         flyingLeftSprites = ['blueBirdLeft'],
@@ -70,6 +73,23 @@ var theGame = (function(){
             }, this);
 
             this.game.time.events.loop(Phaser.Timer.SECOND, this.enemyFactory, this);
+            
+            svg = document.getElementById('the-svg');
+            scoreText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            scoreText.setAttribute('x', '0');
+            scoreText.setAttribute('y', '20');
+            scoreText.setAttribute('fill', 'white');
+            scoreText.setAttribute('font-size', '20');
+            scoreText.textContent = 'SCORE';
+            svg.appendChild(scoreText);
+            
+            scoreCount = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            scoreCount.setAttribute('x', '120');
+            scoreCount.setAttribute('y', '20');
+            scoreCount.setAttribute('fill', 'white');
+            scoreCount.setAttribute('font-size', '20');
+            scoreCount.textContent = score;
+            svg.appendChild(scoreCount);
 
 
         },
@@ -107,12 +127,16 @@ var theGame = (function(){
             phoenixRightGroup.callAll('events.onInputDown.add', 'events.onInputDown', this.killAnimal, this);
             phoenixRightGroup.addAll('x', 3);
 
+            scoreCount.textContent = score;
             this.gameOver();
+            
 
         },
         gameOver: function(){
             if(score==3) {
                 this.game.state.start("GameOver", true, false, score);
+                scoreCount.remove();
+                score = 0;
             }
         },
         killAnimal: function(currentDog){
