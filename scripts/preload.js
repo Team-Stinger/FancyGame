@@ -20,7 +20,7 @@ var preload = (function(){
             this.game.load.spritesheet("phoenixRight","resources/images/phoenixRight.png",94,91);
             this.game.load.image("background","resources/images/bg.jpg");
             this.game.load.image("aim","resources/images/Aim.png");
-            this.game.load.image('pause', 'resources/images/pause.jpg');
+            this.game.load.image('pause', 'resources/images/pause.png');
             this.game.load.image("gametitle","resources/images/Title.png");
             this.game.load.image("play","resources/images/playButton.jpg");
             this.game.load.image("gun","resources/images/machineGun.png");

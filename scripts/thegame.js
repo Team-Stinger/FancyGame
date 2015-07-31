@@ -67,7 +67,8 @@ var theGame = (function(){
                 shootingGunSound.play();
             }, this);
 
-            pause = this.game.add.sprite(0, 523, "pause");
+            pause = this.game.add.sprite(0, 530, "pause");
+            pause.scale.setTo(0.1,0.1);
             pause.inputEnabled = true;
             pause.events.onInputUp.add(function () {
                 this.game.paused = true;
