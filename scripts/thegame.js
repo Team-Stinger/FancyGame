@@ -18,6 +18,9 @@ theGame.prototype = {
             gunny = this.game.add.sprite(400,450,"gun");
             this.game.physics.arcade.enable(gunny);
 
+        aim = this.game.add.sprite(this.game.input.mousePointer.x, this.game.input.mousePointer.y, 'aim');
+        aim.scale.set(0.1, 0.1);
+
             rightMovingEnemies = this.game.add.group();
             leftMovingEnemies = this.game.add.group();
 
@@ -58,6 +61,9 @@ theGame.prototype = {
     },
     update: function(){
         this.game.input.addMoveCallback(this.moveTheGun, gunny);
+
+        aim.x = this.game.input.mousePointer.x - aim.width / 2;
+        aim.y = this.game.input.mousePointer.y - aim.width / 2;
 
         rightMovingEnemies.callAll('animations.play', 'animations', 'walk', 10, true);
         rightMovingEnemies.callAll('events.onInputDown.add', 'events.onInputDown', this.killDog, this);
