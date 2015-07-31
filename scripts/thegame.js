@@ -178,6 +178,10 @@ var theGame = (function(){
             }
         },
         killAnimal: function(currentDog){
+            var hole = this.game.add.sprite(currentDog.x, currentDog.y, "bulletHole");
+            hole.alpha = 1;
+            hole.scale.setTo(0.5, 0.5);
+            this.game.add.tween(hole).to( { alpha: 0 }, 1000, "Linear", true);
             shootingGunSound.play();
             hitAnimalSound.play();
             currentDog.kill();
