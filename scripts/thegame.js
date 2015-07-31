@@ -20,6 +20,8 @@ var theGame = (function(){
         scoreCount,
         scoreText,
         svg,
+        svgLivesCounter,
+        svgLivesString,
         walkingLeftSprites = ['turtleLeft', 'raccoon'],
         walkingRightSprites = ['turtle', 'camel', 'fox'],
         flyingLeftSprites = ['blueBirdLeft'],
@@ -79,7 +81,7 @@ var theGame = (function(){
             svg = document.getElementById('the-svg');
             scoreText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             scoreText.setAttribute('x', '0');
-            scoreText.setAttribute('y', '20');
+            scoreText.setAttribute('y', '50');
             scoreText.setAttribute('fill', 'white');
             scoreText.setAttribute('font-size', '20');
             scoreText.textContent = 'SCORE';
@@ -87,11 +89,27 @@ var theGame = (function(){
             
             scoreCount = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             scoreCount.setAttribute('x', '120');
-            scoreCount.setAttribute('y', '20');
+            scoreCount.setAttribute('y', '50');
             scoreCount.setAttribute('fill', 'white');
             scoreCount.setAttribute('font-size', '20');
             scoreCount.textContent = score;
             svg.appendChild(scoreCount);
+            
+            svgLivesString = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            svgLivesString.setAttribute('x', '0');
+            svgLivesString.setAttribute('y', '15');
+            svgLivesString.setAttribute('fill', 'white');
+            svgLivesString.setAttribute('font-size', '20');
+            svgLivesString.textContent = 'Lives';
+            svg.appendChild(svgLivesString);
+            
+            svgLivesCounter = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            svgLivesCounter.setAttribute('x', '120');
+            svgLivesCounter.setAttribute('y', '15');
+            svgLivesCounter.setAttribute('fill', 'white');
+            svgLivesCounter.setAttribute('font-size', '20');
+            svgLivesCounter.textContent = lives;
+            svg.appendChild(svgLivesCounter);
 
 
         },
@@ -144,17 +162,20 @@ var theGame = (function(){
             phoenixRightGroup.callAll('events.onOutOfBounds.add', 'events.onOutOfBounds', this.gameOver, this);
 
             scoreCount.textContent = score;
+            svgLivesCounter.textContent = lives;
             
             
 
         },
         gameOver: function(){
+            lives -= 1;
             if(lives === 0) {
                 this.game.state.start("GameOver", true, false, score);
                 scoreCount.remove();
+                svgLivesCounter.remove();
                 score = 0;
+                lives = 5;
             }
-            lives -= 1;
         },
         killAnimal: function(currentDog){
             shootingGunSound.play();
