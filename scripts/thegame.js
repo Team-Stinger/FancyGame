@@ -122,8 +122,7 @@ var theGame = (function(){
         },
         update: function(){
             this.game.input.addMoveCallback(this.moveTheGun, gunny);
-            console.log(this.game.input.mousePointer.y);
-            console.log(pause.y);
+
             if ((this.game.input.mousePointer.x < (pause.x + pause.width) &&this.game.input.mousePointer.x>0)&&
                 (this.game.input.mousePointer.y > pause.y && this.game.input.mousePointer.y < (pause.y+pause.height))
             ) {

@@ -15,7 +15,7 @@
     <script src="bower_components/jquery/src/jquery.js"></script>
 </head>
 <body>
-<div class="buttons">
+<div class="buttons container">
         <button type="button" class="game" data-toggle="modal" data-target="#myModal">Register score</button>
         <button id="highscores" class="game">Highscores</button>
         <button id="play" class="game">Play</button>
@@ -46,8 +46,6 @@
             </div>
         </div>
     </div>
-
-
 </div>
 
 <div id="scores" class="hidden">

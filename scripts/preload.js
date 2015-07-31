@@ -27,19 +27,17 @@ var preload = (function(){
             this.game.load.image("gun", "resources/images/machineGun.png");
             this.game.load.image("gameover", "resources/images/Game_over.png");
             this.game.load.image("bulletHole", "resources/images/bulletHole.png");
-            this.game.load.audio('shootingSound', "resources/audio/shortSound.mp3");
-            this.game.load.audio('backgroundSound', "resources/audio/backgroundMusic1.mp3");
-            this.game.load.audio('hittedCreatureSound', "resources/audio/hittedCreatureSound");
-			this.game.load.audio('endGameSound', "resources/audio/gameOverSound");
+            this.game.load.audio('shootingSound', "resources/audio/gunShot.mp3");
+            this.game.load.audio('backgroundSound', "resources/audio/Jungle.wav");
+            this.game.load.audio('hittedCreatureSound', "resources/audio/hitted.mp3");
+			this.game.load.audio('endGameSound', "resources/audio/gameOverSound.mp3");
 
             this.game.load.image("gametitle","resources/images/Title.png");
             this.game.load.image("play","resources/images/playButton.png");
             this.game.load.image("gun","resources/images/machineGun.png");
             this.game.load.image("gameover","resources/images/Game_over.jpg");
             this.game.load.image("bulletHole","resources/images/bulletHole.png");
-            this.game.load.audio('shootingSound', "resources/audio/gunShot.mp3");
-            this.game.load.audio('backgroundSound',"resources/audio/Jungle.wav");
-            this.game.load.audio('hittedCreatureSound',"resources/audio/hitted.mp3");
+
 
 
         },

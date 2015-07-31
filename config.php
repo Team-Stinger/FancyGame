@@ -2,7 +2,7 @@
 $db = array(
     "dbname" => "gameusers",
     "username" => "root",
-    "password" => "",
+    "password" => "root",
     "host" => "localhost",
     "port" => "3306"
 );
